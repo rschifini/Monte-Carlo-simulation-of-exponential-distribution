@@ -1,0 +1,52 @@
+---
+title: "Exponential distribution simulation"
+author: "Ricardo Schifini"
+date: "May 3, 2019"
+output: html_document
+---
+
+# Monte Carlo simulation of the Exponential Distribution
+
+## Parameters
+
+`R` is the average rate of the events
+`t` is the simulation's total time
+
+```{r}
+R = 5
+t = 1000000
+```
+
+## Events
+
+The events are simulated by a uniform random distribution between 0 and `t`.
+
+```{r}
+events = runif(R*t ,0, t)
+```
+
+Since the exponential distribution is about the time between events, we need to sort the events and then calculate the time between events.
+
+```{r}
+t_events = diff(sort(events))
+
+```
+
+## Graphs
+
+```{r}
+x = sort(t_events)
+y = (1:length(t_events))/length(t_events)
+sel = seq(from=1, along.with = x, by = 100)
+
+plot(x[sel], y[sel], type = "l")
+
+z = rexp(t, R)
+
+xe = sort(z)
+ye = (1:length(z))/length(z)
+sel = seq(from=1, along.with = xe, by = 100)
+
+points(xe[sel], ye[sel], col='red')
+
+```
