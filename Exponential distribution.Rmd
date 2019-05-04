@@ -4,10 +4,19 @@ author: "Ricardo Schifini"
 date: "May 3, 2019"
 output: html_document
 ---
+# The Exponential Distribution
 
-# Monte Carlo simulation of the Exponential Distribution
+The exponential distribution is used to describe the time between independent events that happen at an average rate.
 
-## Parameters
+This distribution can be easily deduced analitycaly, but it can be also simulated by using an uniform probability distribution.
+
+## Simulating the Exponential Distribution
+
+Independent events that happen at an average rate can be simulated with the Monte Carlo method and a uniform distribution.
+
+Events that happen at an average rate of `R` events/time_unit can be simulated by a total of `T * R` events, where `T` is the total time units.
+
+### Parameters
 
 `R` is the average rate of the events
 `t` is the simulation's total time
@@ -17,22 +26,31 @@ R = 5
 t = 1000000
 ```
 
-## Events
+### Events
 
-The events are simulated by a uniform random distribution between 0 and `t`.
+This means that we have to create `R*T` events having a random time of happening uniformly distributed between 0 and `T`
 
 ```{r}
 events = runif(R*t ,0, t)
 ```
-
-Since the exponential distribution is about the time between events, we need to sort the events and then calculate the time between events.
+We need to calculate the time between consecutive events. To do so, we first need to sort the events from low to high.
 
 ```{r}
 t_events = diff(sort(events))
 
 ```
 
-## Graphs
+### Graphs
+
+Probability distribution
+
+```{r}
+j = hist(t_events, 500, plot = F)
+plot(j$breaks[-1],j$counts, type = "l")
+
+```
+
+Cumulative distribution
 
 ```{r}
 x = sort(t_events)
