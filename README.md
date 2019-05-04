@@ -12,6 +12,8 @@ Independent events that happen at an average rate can be simulated with the Mont
 
 Events that happen at an average rate of R events/time_unit can be simulated by a total of T * R events, where T is the total time units.
 
-## File
+## Files
 
 A Jupyter Notebook shows how to create a Monte Carlo simulation that generates an Exponential probability distribution from a uniform probability distribution.
+
+An R Markdown file is also available. 
